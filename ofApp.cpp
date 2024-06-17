@@ -7,7 +7,7 @@ void ofApp::setup() {
 	// óÜê˘äKíiÇÃçÏê¨
 	double pi = 3.141592653589;
 	//testmesh();
-	meshSpiralStaircase(200, 50, 1, pi / 8);
+	meshSpiralStaircase(200, 100, 3, pi / 8);
 	getOnering(mesh);
 }
 
@@ -214,6 +214,60 @@ void ofApp::meshSpiralStaircase(double r, double h, unsigned n, double theta) {
 }
 
 //--------------------------------------------------------------
+void ofApp::displayPointIndex(ofMesh mesh) {
+
+	ofBackgroundGradient(ofColor(64), ofColor(0));
+
+	ofSetColor(255);
+	cam.begin();
+
+	ofSetColor(ofColor::gray);
+	mesh.drawWireframe();
+
+	glPointSize(2);
+	ofSetColor(ofColor::white);
+	mesh.drawVertices();
+	cam.end();
+	
+	int n = mesh.getNumVertices();
+	glm::vec2 offset(10, -10);
+	for (int i = 0; i < n; i++) {
+		glm::vec3 cur = cam.worldToScreen(mesh.getVertex(i));
+		ofSetColor(ofColor::yellow);
+		ofDrawBitmapStringHighlight(ofToString(i), cur.x + offset.x, cur.y + offset.y);
+	}
+
+	/*
+	int n = mesh.getNumVertices();
+	float nearestDistance = 0;
+	glm::vec2 nearestVertex;
+	int nearestIndex = 0;
+	glm::vec3 mouse(mouseX, mouseY, 0);
+	for (int i = 0; i < n; i++) {
+		glm::vec3 cur = cam.worldToScreen(mesh.getVertex(i));
+		float distance = glm::distance(cur, mouse);
+		if (i == 0 || distance < nearestDistance) {
+			nearestDistance = distance;
+			nearestVertex = cur;
+			nearestIndex = i;
+		}
+	}
+
+	ofSetColor(ofColor::gray);
+	ofDrawLine(nearestVertex, mouse);
+
+	ofNoFill();
+	ofSetColor(ofColor::yellow);
+	ofSetLineWidth(2);
+	ofDrawCircle(nearestVertex, 4);
+	ofSetLineWidth(1);
+
+	glm::vec2 offset(10, -10);
+	ofDrawBitmapStringHighlight(ofToString(nearestIndex), mouse + offset);
+	*/
+}
+
+//--------------------------------------------------------------
 void ofApp::update() {
 
 }
@@ -221,7 +275,7 @@ void ofApp::update() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-
+	/*
 	ofBackgroundGradient(ofColor(64), ofColor(0));
 
 	ofSetColor(255);
@@ -249,6 +303,9 @@ void ofApp::draw() {
 	mesh.drawVertices();
 
 	cam.end();
+	*/
+
+	displayPointIndex(mesh);
 }
 
 //--------------------------------------------------------------

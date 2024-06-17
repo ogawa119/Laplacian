@@ -25,7 +25,7 @@ public:
 	void rotate(double& x, double& y, double theta);
 	void meshSpiralStaircase(double r, double h, unsigned n, double theta);
 	void getOnering(ofMesh mesh);
-
+	void displayPointIndex(ofMesh mesh);
 	ofMesh mesh;
 	ofEasyCam cam;
 };
