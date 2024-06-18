@@ -44,7 +44,6 @@ void ofApp::getOnering(ofMesh mesh) {
 	};
 
 	// (1) triList‚Ìì¬----------------------------------
-	vector<vector<int>> triList;
 
 	// Ú‘±‚µ‚Ä‚¢‚é’¸“_—ñ‚ğæ“¾
 	vector<unsigned int> triInd = mesh.getIndices();
@@ -66,7 +65,7 @@ void ofApp::getOnering(ofMesh mesh) {
 	// (2) cnctface‚Ìì¬----------------------------------
 	// ”z—ñ‚ÌéŒ¾
 	int pnum = mesh.getNumVertices();  // pnum = ’¸“_”
-	vector<vector<int>> cnctface(pnum);
+	cnctface.resize(pnum);
 
 	int triIdx = 0;
 	for (int i = 0; i < triInd.size();) {
@@ -81,7 +80,7 @@ void ofApp::getOnering(ofMesh mesh) {
 
 
 	// (3) onering‚Ìì¬--------------------------------
-	vector<vector<int>> onering(pnum);
+	onering.resize(pnum);
 
 	for (int i = 0; i < pnum; i++) {
 		map<int, int> m;
@@ -237,34 +236,7 @@ void ofApp::displayPointIndex(ofMesh mesh) {
 		ofDrawBitmapStringHighlight(ofToString(i), cur.x + offset.x, cur.y + offset.y);
 	}
 
-	/*
-	int n = mesh.getNumVertices();
-	float nearestDistance = 0;
-	glm::vec2 nearestVertex;
-	int nearestIndex = 0;
-	glm::vec3 mouse(mouseX, mouseY, 0);
-	for (int i = 0; i < n; i++) {
-		glm::vec3 cur = cam.worldToScreen(mesh.getVertex(i));
-		float distance = glm::distance(cur, mouse);
-		if (i == 0 || distance < nearestDistance) {
-			nearestDistance = distance;
-			nearestVertex = cur;
-			nearestIndex = i;
-		}
-	}
-
-	ofSetColor(ofColor::gray);
-	ofDrawLine(nearestVertex, mouse);
-
-	ofNoFill();
-	ofSetColor(ofColor::yellow);
-	ofSetLineWidth(2);
-	ofDrawCircle(nearestVertex, 4);
-	ofSetLineWidth(1);
-
-	glm::vec2 offset(10, -10);
-	ofDrawBitmapStringHighlight(ofToString(nearestIndex), mouse + offset);
-	*/
+	
 }
 
 //--------------------------------------------------------------

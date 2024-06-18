@@ -26,6 +26,11 @@ public:
 	void meshSpiralStaircase(double r, double h, unsigned n, double theta);
 	void getOnering(ofMesh mesh);
 	void displayPointIndex(ofMesh mesh);
+
+	vector<vector<int>> triList;
+	vector<vector<int>> cnctface;
+	vector<vector<int>> onering;
+
 	ofMesh mesh;
 	ofEasyCam cam;
 };
